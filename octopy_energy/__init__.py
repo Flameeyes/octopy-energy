@@ -42,3 +42,27 @@ class Consumption:
             iso8601.parse_date(json_dict["interval_start"]),
             iso8601.parse_date(json_dict["interval_end"]),
         )
+
+    @classmethod
+    def from_graphql(cls, gql_dict: dict[str, Any]) -> "Consumption":
+        if "node" in gql_dict:
+            return cls.from_graphql(gql_dict["node"])
+
+        return Consumption(
+            float(gql_dict["value"]),
+            iso8601.parse_date(gql_dict["startAt"]),
+            iso8601.parse_date(gql_dict["endAt"]),
+        )
+
+
+@dataclasses.dataclass
+class Tariff:
+    display_name: str
+    rate: float
+
+    @classmethod
+    def from_graphql(cls, gql_dict: dict[str, Any]) -> "Tariff":
+        if "tariff" in gql_dict:
+            return cls.from_graphql(gql_dict["tariff"])
+
+        return Tariff(gql_dict["displayName"], gql_dict["unitRate"])

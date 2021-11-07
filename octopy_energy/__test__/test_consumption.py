@@ -23,3 +23,23 @@ class ConsumptionTest(unittest.TestCase):
             ),
             Consumption.from_rest(json.loads(rest_result_str)),
         )
+
+    def test_from_graphql(self) -> None:
+        gql_result_str = """
+            {
+                "node": {
+                    "value": "0.20900000000000000000",
+                    "startAt": "2021-11-06T23:30:00+00:00",
+                    "endAt": "2021-11-07T00:00:00+00:00"
+                }
+            }
+        """
+
+        self.assertEqual(
+            Consumption(
+                0.209,
+                datetime.datetime(2021, 11, 6, 23, 30, 0, tzinfo=datetime.timezone.utc),
+                datetime.datetime(2021, 11, 7, 0, 0, 0, tzinfo=datetime.timezone.utc),
+            ),
+            Consumption.from_graphql(json.loads(gql_result_str)),
+        )
