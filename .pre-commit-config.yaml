@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: 2021 The octopy-energy Authors
+#
+# SPDX-License-Identifier: 0BSD
+
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+    -   id: check-yaml
+    -   id: end-of-file-fixer
+    -   id: trailing-whitespace
+-   repo: https://github.com/PyCQA/isort
+    rev: 5.10.0
+    hooks:
+      - id: isort
+        additional_dependencies:
+          - toml
+-   repo: https://github.com/psf/black
+    rev: 21.10b0
+    hooks:
+    - id: black
+-   repo: https://gitlab.com/pycqa/flake8
+    rev: 3.9.2
+    hooks:
+    - id: flake8
+-   repo: https://github.com/fsfe/reuse-tool
+    rev: v0.13.0
+    hooks:
+    - id: reuse
